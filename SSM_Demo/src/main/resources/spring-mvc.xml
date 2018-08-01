@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd"
+
+>
+
+
+    <!-- 启用spring mvc 注解 -->
+    <context:annotation-config/>
+    <!--自动扫描-->
+    <context:component-scan base-package="com.wmn.controller"/>
+
+    <!-- 配置 dao 层自动扫描包 -->
+    <!--<context:component-scan base-package="com.wmn.dao"/>-->
+    <!--<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+        <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>-->
+        <!--<property name="basePackage" value="com.wmn.dao"/>-->
+    <!--</bean>-->
+
+
+
+    <context:component-scan base-package="com.wmn.*">
+        <!-- 不扫描注解为controller的类型 -->
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+    </context:component-scan>
+
+
+    <mvc:annotation-driven/>
+    <mvc:default-servlet-handler/>
+    <!--<mvc:resources location="/static/" mapping="/static/**"/>-->
+
+    <!-- Declare a view resolver -->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+
+</beans>
